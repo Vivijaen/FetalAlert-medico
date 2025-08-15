@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>FetalAlert – Panel Clínico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- CSS separado -->
+  <link rel="stylesheet" href="medico.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="md-header">
+    <div class="md-header__title">
+      <h1>FetalAlert – Panel Clínico</h1>
+      <p class="md-header__subtitle">Visor para profesionales de la salud</p>
+    </div>
+    <div id="md-conn" class="md-conn md-conn--idle">Conectando…</div>
+  </header>
+
+  <!-- Barra de filtros / info -->
+  <section class="md-toolbar">
+    <div class="md-row">
+      <div class="md-field">
+        <label>ID Paciente</label>
+        <input id="fld-patient" type="text" placeholder="Ej. 12345" />
+      </div>
+
+      <div class="md-field">
+        <label>Rango de fecha (opcional)</label>
+        <div class="md-inline">
+          <input id="fld-from" type="date" />
+          <span class="md-sep">–</span>
+          <input id="fld-to" type="date" />
+        </div>
+      </div>
+
+      <div class="md-actions">
+        <button id="btn-apply" class="md-btn md-btn--primary">Aplicar</button>
+        <button id="btn-export" class="md-btn md-btn--ghost">Exportar CSV</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resumen -->
+  <main class="md-main">
+    <section class="md-cards">
+      <div class="md-card">
+        <h3>Última medición</h3>
+        <div class="md-last">
+          <div class="md-last__row"><span>Fecha:</span><strong id="last-date">--</strong></div>
+          <div class="md-last__row"><span>Hora:</span><strong id="last-time">--</strong></div>
+          <div class="md-last__row md-last__row--metric">
+            <div class="md-metric">
+              <div class="md-metric__label">FC (BPM)</div>
+              <div id="last-hr" class="md-metric__value">--</div>
+              <div id="last-hr-status" class="md-metric__status">–</div>
+            </div>
+            <div class="md-metric">
+              <div class="md-metric__label">SpO₂ (%)</div>
+              <div id="last-spo2" class="md-metric__value">--</div>
+              <div id="last-spo2-status" class="md-metric__status">–</div>
+            </div>
+            <div class="md-metric">
+              <div class="md-metric__label">Movimientos</div>
+              <div id="last-mov" class="md-metric__value">--</div>
+              <div class="md-metric__status">–</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md-card">
+        <h3>Estado</h3>
+        <div id="md-status" class="md-status md-status--idle">Esperando datos…</div>
+        <p class="md-hint">* Los datos se actualizan cuando la paciente realiza una medición.</p>
+      </div>
+    </section>
+
+    <!-- Tabla -->
+    <section class="md-table-wrap">
+      <h3>Historial reciente</h3>
+      <table class="md-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>FC</th>
+            <th>SpO₂</th>
+            <th>Mov.</th>
+          </tr>
+        </thead>
+        <tbody id="tbl-body">
+          <tr><td colspan="5" class="md-empty">Sin datos…</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- JS separado -->
+  <script src="medico.js"></script>
+</body>
+</html>
